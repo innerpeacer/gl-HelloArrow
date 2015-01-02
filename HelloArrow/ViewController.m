@@ -7,21 +7,22 @@
 //
 
 #import "ViewController.h"
+#import "GLView.h"
 
 @interface ViewController ()
-
+{
+    GLView *m_view;
+    
+}
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    m_view = [[GLView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:m_view];
 }
 
 @end
