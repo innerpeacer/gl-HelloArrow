@@ -11,6 +11,8 @@
 #include <OpenGLES/ES1/gl.h>
 #include <OpenGLES/ES1/glext.h>
 
+static const float RevolutionsPerSecond = 1;
+
 class RenderingEngine1 : public IRenderingEngine
 {
 public:
@@ -18,11 +20,16 @@ public:
     
     void Initialize(int width, int heith);
     void Render() const;
-    void UpdateAnimation(float timeStep) {}
-    void OnRotate(DeviceOrientation newOrientation) {}
+    void UpdateAnimation(float timeStep);
+    void OnRotate(DeviceOrientation newOrientation);
     ~RenderingEngine1() {}
     
 private:
+    float RotationDirection() const;
+    
+    float m_desiredAngle;
+    float m_currentAngle;
+    
     GLuint m_framebuffer;
     GLuint m_renderbuffer;
 };
@@ -31,6 +38,60 @@ private:
 IRenderingEngine *CreateRenderer1()
 {
     return new RenderingEngine1();
+}
+
+void RenderingEngine1::OnRotate(DeviceOrientation newOrientation)
+{
+    float angle = 0;
+    switch (newOrientation) {
+        case DeviceOrientationLandscapeLeft:
+            angle = 270;
+            break;
+            
+        case DeviceOrientationPortraitUpsideDown:
+            angle = 180;
+            break;
+            
+        case DeviceOrientationLandscapeRight:
+            angle = 90;
+            break;
+            
+        default:
+            break;
+    }
+    m_desiredAngle = angle;
+}
+
+void RenderingEngine1::UpdateAnimation(float timeStep)
+{
+    float direction = RotationDirection();
+    if (direction == 0) {
+        return;
+    }
+    
+    float degrees = timeStep * 360 * RevolutionsPerSecond;
+    m_currentAngle += degrees * direction;
+    
+    if (m_currentAngle >= 360) {
+        m_currentAngle -= 360;
+    } else if (m_currentAngle < 0) {
+        m_currentAngle += 360;
+    }
+    
+    if (RotationDirection() != direction) {
+        m_currentAngle = m_desiredAngle;
+    }
+}
+
+float RenderingEngine1::RotationDirection() const
+{
+    float delta = m_desiredAngle - m_currentAngle;
+    if (delta == 0) {
+        return 0;
+    }
+    
+    bool counterclockwise = ((delta > 0 && delta <= 180) || (delta < -180));
+    return counterclockwise ? +1 : -1;
 }
 
 RenderingEngine1::RenderingEngine1()
@@ -52,12 +113,18 @@ void RenderingEngine1::Initialize(int width, int heith)
     
     glOrthof(-maxX, +maxX, -maxY, maxY, -1, 1);
     glMatrixMode(GL_MODELVIEW);
+    
+    OnRotate(DeviceOrientationPortrait);
+    m_currentAngle = m_desiredAngle;
 }
 
 void RenderingEngine1::Render() const
 {
     glClearColor(0.5f, 0.5f, 0.5f, 1);
     glClear(GL_COLOR_BUFFER_BIT);
+    
+    glPushMatrix();
+    glRotatef(m_currentAngle, 0, 0, 1);
     
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
@@ -71,4 +138,5 @@ void RenderingEngine1::Render() const
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
     
+    glPopMatrix();
 }
