@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		577EE3F31A56CC2D00B76039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 577EE3F21A56CC2D00B76039 /* main.m */; };
 		577EE3F61A56CC2D00B76039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 577EE3F51A56CC2D00B76039 /* AppDelegate.m */; };
-		577EE3F91A56CC2D00B76039 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577EE3F81A56CC2D00B76039 /* ViewController.m */; };
+		577EE3F91A56CC2D00B76039 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 577EE3F81A56CC2D00B76039 /* ViewController.mm */; };
 		577EE3FC1A56CC2D00B76039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 577EE3FA1A56CC2D00B76039 /* Main.storyboard */; };
 		577EE3FE1A56CC2D00B76039 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 577EE3FD1A56CC2D00B76039 /* Images.xcassets */; };
 		577EE4011A56CC2D00B76039 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 577EE3FF1A56CC2D00B76039 /* LaunchScreen.xib */; };
-		577EE41E1A56CE4100B76039 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 577EE41D1A56CE4100B76039 /* GLView.m */; };
+		577EE41E1A56CE4100B76039 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 577EE41D1A56CE4100B76039 /* GLView.mm */; };
+		579C21351A57B7F900489D7F /* RenderingEngine1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 579C21331A57B7F900489D7F /* RenderingEngine1.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,14 +24,18 @@
 		577EE3F41A56CC2D00B76039 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		577EE3F51A56CC2D00B76039 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		577EE3F71A56CC2D00B76039 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		577EE3F81A56CC2D00B76039 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		577EE3F81A56CC2D00B76039 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		577EE3FB1A56CC2D00B76039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		577EE3FD1A56CC2D00B76039 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		577EE4001A56CC2D00B76039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		577EE4161A56CD8500B76039 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		577EE4181A56CD8A00B76039 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		577EE41C1A56CE4100B76039 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
-		577EE41D1A56CE4100B76039 /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
+		577EE41D1A56CE4100B76039 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
+		579C21321A56D22300489D7F /* IRenderingEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IRenderingEngine.hpp; sourceTree = "<group>"; };
+		579C21331A57B7F900489D7F /* RenderingEngine1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderingEngine1.cpp; sourceTree = "<group>"; };
+		579C21361A57B90A00489D7F /* GraphicsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicsData.h; sourceTree = "<group>"; };
+		579C21381A57B94800489D7F /* gl.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gl.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +73,7 @@
 				577EE3F41A56CC2D00B76039 /* AppDelegate.h */,
 				577EE3F51A56CC2D00B76039 /* AppDelegate.m */,
 				577EE3F71A56CC2D00B76039 /* ViewController.h */,
-				577EE3F81A56CC2D00B76039 /* ViewController.m */,
+				577EE3F81A56CC2D00B76039 /* ViewController.mm */,
 				577EE3FA1A56CC2D00B76039 /* Main.storyboard */,
 				577EE3FD1A56CC2D00B76039 /* Images.xcassets */,
 				577EE3FF1A56CC2D00B76039 /* LaunchScreen.xib */,
@@ -84,6 +89,7 @@
 				577EE4161A56CD8500B76039 /* OpenGLES.framework */,
 				577EE3F11A56CC2D00B76039 /* Info.plist */,
 				577EE3F21A56CC2D00B76039 /* main.m */,
+				579C21381A57B94800489D7F /* gl.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -92,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				577EE41C1A56CE4100B76039 /* GLView.h */,
-				577EE41D1A56CE4100B76039 /* GLView.m */,
+				577EE41D1A56CE4100B76039 /* GLView.mm */,
 			);
 			name = "GL-ObjC";
 			sourceTree = "<group>";
@@ -100,6 +106,9 @@
 		577EE41B1A56CE1600B76039 /* GL-cpp */ = {
 			isa = PBXGroup;
 			children = (
+				579C21321A56D22300489D7F /* IRenderingEngine.hpp */,
+				579C21331A57B7F900489D7F /* RenderingEngine1.cpp */,
+				579C21361A57B90A00489D7F /* GraphicsData.h */,
 			);
 			name = "GL-cpp";
 			sourceTree = "<group>";
@@ -174,10 +183,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				577EE3F91A56CC2D00B76039 /* ViewController.m in Sources */,
-				577EE41E1A56CE4100B76039 /* GLView.m in Sources */,
+				577EE3F91A56CC2D00B76039 /* ViewController.mm in Sources */,
+				577EE41E1A56CE4100B76039 /* GLView.mm in Sources */,
 				577EE3F61A56CC2D00B76039 /* AppDelegate.m in Sources */,
 				577EE3F31A56CC2D00B76039 /* main.m in Sources */,
+				579C21351A57B7F900489D7F /* RenderingEngine1.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +293,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = HelloArrow/gl.pch;
 				INFOPLIST_FILE = HelloArrow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -293,6 +304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = HelloArrow/gl.pch;
 				INFOPLIST_FILE = HelloArrow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
