@@ -10,6 +10,8 @@
 
 #import <OpenGLES/ES2/gl.h>
 
+const bool ForceES1 = false;
+
 @implementation GLView
 
 - (id)initWithFrame:(CGRect)frame
@@ -18,33 +20,29 @@
         CAEAGLLayer *eaglLayer = (CAEAGLLayer *)super.layer;
         eaglLayer.opaque = YES;
         
-        m_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+        EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES2;
+        m_context = [[EAGLContext alloc] initWithAPI:api];
+        if (!m_context || ForceES1) {
+            api = kEAGLRenderingAPIOpenGLES1;
+            m_context = [[EAGLContext alloc] initWithAPI:api];
+        }
+        
         if (!m_context || ![EAGLContext setCurrentContext:m_context]) {
             return nil;
         }
         
+        if (api == kEAGLRenderingAPIOpenGLES1) {
+            NSLog(@"Using OpenGL ES 1.1");
+            m_renderingEngine = CreateRenderer1();
+        } else {
+            NSLog(@"Using OpenGL ES 2.0");
+            m_renderingEngine = CreateRenderer2();
+        }
         
-//        GLuint framebuffer;
-//        GLuint renderbuffer;
-//        
-//        glGenFramebuffersOES(1, &framebuffer);
-//        glGenRenderbuffersOES(1, &renderbuffer);
-//        glBindFramebufferOES(GL_FRAMEBUFFER_OES, framebuffer);
-//        glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderbuffer);
-//        [m_context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:eaglLayer];
-//        
-//        glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, renderbuffer);
-//        
-//        glViewport(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));
-//        
-//        [self drawView];
-        
-        m_renderingEngine = CreateRenderer1();
         [m_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:eaglLayer];
         m_renderingEngine->Initialize(CGRectGetWidth(frame), CGRectGetHeight(frame));
         
         [self drawView:nil];
-        
         
         m_timestep = CACurrentMediaTime();
         CADisplayLink *displayLink;
